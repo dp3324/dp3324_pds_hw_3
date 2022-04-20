@@ -43,8 +43,8 @@
                             '<td>'. $cake_id . '</td>' .
                             '<td>' . $cake_name . '</td>'.
                             '<td>' . $cake_status . '</td>'.
-                            '<td>' . $cake_price . '</td>'.
-                            '<td>' . $cake_price_paid . '</td>'.
+                            '<td>$' . $cake_price . '</td>'.
+                            '<td>$' . $cake_price_paid . '</td>'.
                         '</tr>';
                 }
                 echo '</table>';
