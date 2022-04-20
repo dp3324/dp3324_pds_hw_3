@@ -22,20 +22,29 @@
             if($customer->num_rows == 0) {
                 echo '<div class="error"> Please enter valid Customer ID.</div>';
             } else {
-                $qry = 'select C.cakeid as cakeid, cakename from Orders join Cake C on Orders.cakeid = C.cakeid where custid = ' . $custid . ' order by ordertime';
+                $qry = 'select C.cakeid as cakeid, cakename, status, price, pricepaid from Orders join Cake C on Orders.cakeid = C.cakeid where custid = ' . $custid . ' order by ordertime desc';
                 $cakes = $db->query($qry);
                 echo '<h3 class="heading">Cakes ordered by <u>'.$custname.'</u></h3>';
                 echo '<table class="tables">';
                 echo '<tr>' .
                     '<th>ID</th>' .
                     '<th>Cake Name</th>' .
+                    '<th>Status</th>' .
+                    '<th>Price</th>' .
+                    '<th>Total Price Paid</th>' .
                     '</tr>';
                 foreach ($cakes as $cake) {
-                    $cakeid = $cake['cakeid'];
-                    $cakename = $cake['cakename'];
-                    echo '<tr onclick="select_cakeid(\''.$cakeid.'\',\''.$cakename.'\')'.'">' .
-                            '<td>'. $cakeid . '</td>' .
-                            '<td>' . $cakename . '</td>'.
+                    $cake_id = $cake['cakeid'];
+                    $cake_name = $cake['cakename'];
+                    $cake_status = $cake['status'];
+                    $cake_price = $cake['price'];
+                    $cake_price_paid = $cake['pricepaid'];
+                    echo '<tr onclick="select_cakeid(\''.$cake_id.'\',\''.$cake_name.'\')'.'">' .
+                            '<td>'. $cake_id . '</td>' .
+                            '<td>' . $cake_name . '</td>'.
+                            '<td>' . $cake_status . '</td>'.
+                            '<td>' . $cake_price . '</td>'.
+                            '<td>' . $cake_price_paid . '</td>'.
                         '</tr>';
                 }
                 echo '</table>';
